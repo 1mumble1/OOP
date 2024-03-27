@@ -142,6 +142,9 @@
     <Text Include="input.txt" />
     <Text Include="newInput.txt" />
     <Text Include="nonValid.txt" />
+    <Text Include="output.txt" />
+    <Text Include="outputBadSaveTranslation.txt" />
+    <Text Include="outputGoodSaveTranslation.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

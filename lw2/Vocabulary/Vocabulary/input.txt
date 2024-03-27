@@ -1,2 +1,5 @@
 cat:кошка
 dog:собака
+father:папа
+grandma:бабуля
+the red square:красная площадь

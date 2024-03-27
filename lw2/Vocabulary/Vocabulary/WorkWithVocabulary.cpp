@@ -52,12 +52,12 @@ int main(int argc, char *argv[])
 
         if (word == EXIT)
         {
-            return TryToSaveChanges(args.value(), vocabulary, startSizeOfVocabulary);
+            return TryToSaveChanges(args.value(), vocabulary, startSizeOfVocabulary, std::cin, std::cout);
         }
 
         if (!FindWordInVocabulary(word, vocabulary))
         {
-            TryToSaveNewTranslation(word, vocabulary);
+            TryToSaveNewTranslation(word, vocabulary, std::cin, std::cout);
             continue;
         }
 

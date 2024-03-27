@@ -83,48 +83,49 @@ bool SaveChanges(const std::string& outputFileName, const std::map<std::string, 
 	return true;
 }
 
-void TryToSaveNewTranslation(const std::string& word, std::map<std::string, std::string>& vocabulary)
+void TryToSaveNewTranslation(const std::string& word, std::map<std::string, std::string>& vocabulary, std::istream& input, std::ostream& output)
 {
-	std::cout << "Неизвестное слово \'" << word << "\'. Введите перевод или пустую строку для отказа." << std::endl;
+	output << "Неизвестное слово \'" << word << "\'. Введите перевод или пустую строку для отказа." << std::endl;
 
 	std::string translate;
-	std::getline(std::cin, translate);
+	std::getline(input, translate);
 
 	if (!translate.empty())
 	{
 		vocabulary.insert({ LowerCaseString(word), translate});
-		std::cout << "Слово \'" << word << "\' сохранено в словаре как \'" << translate << "\'." << std::endl;
+		output << "Слово \'" << word << "\' сохранено в словаре как \'" << translate << "\'." << std::endl;
 	}
 	else
 	{
-		std::cout << "Слово \'" << word << "\' проигнорировано." << std::endl;
+		output << "Слово \'" << word << "\' проигнорировано." << std::endl;
 	}
 }
 
-int TryToSaveChanges(const std::string& outputFileName, const std::map<std::string, std::string>& vocabulary, size_t startSize)
+int TryToSaveChanges(const std::string& outputFileName, const std::map<std::string, std::string>& vocabulary, size_t startSize, 
+	std::istream& input, std::ostream& output)
 {
 	if (!IsVocabularyChanged(vocabulary, startSize))
 	{
 		return 0;
 	}
 
-	std::cout << "В словарь были внесены изменения. Введите Y или y для сохранения перед выходом." << std::endl;
+	output << "В словарь были внесены изменения. Введите Y или y для сохранения перед выходом." << std::endl;
 
 	std::string line;
-	std::getline(std::cin, line);
+	std::getline(input, line);
 
 	if (line != YES_BIG && line != YES_SMALL)
 	{
-		std::cout << "Изменения не сохранены. До свидания." << std::endl;
+		output << "Изменения не сохранены. До свидания." << std::endl;
 		return 0;
 	}
 
 	if (!SaveChanges(outputFileName, vocabulary))
 	{
-		std::cout << "Failed to write data in vocabulary." << std::endl;
+		output << "Failed to write data in vocabulary." << std::endl;
 		return 1;
 	}
 
-	std::cout << "Изменения сохранены. До свидания." << std::endl;
+	output << "Изменения сохранены. До свидания." << std::endl;
 	return 0;
 }

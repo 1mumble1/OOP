@@ -34,5 +34,8 @@
     <Text Include="nonValid.txt" />
     <Text Include="input.txt" />
     <Text Include="newInput.txt" />
+    <Text Include="output.txt" />
+    <Text Include="outputGoodSaveTranslation.txt" />
+    <Text Include="outputBadSaveTranslation.txt" />
   </ItemGroup>
 </Project>

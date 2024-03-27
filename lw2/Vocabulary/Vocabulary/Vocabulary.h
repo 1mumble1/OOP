@@ -9,5 +9,6 @@ std::string LowerCaseString(const std::string& subject);
 bool FindWordInVocabulary(const std::string& word, const std::map<std::string, std::string>& vocabulary);
 bool IsVocabularyChanged(const std::map<std::string, std::string>& vocabulary, size_t startSize);
 bool SaveChanges(const std::string& outputFileName, const std::map<std::string, std::string>& vocabulary);
-void TryToSaveNewTranslation(const std::string& word, std::map<std::string, std::string>& vocabulary);
-int TryToSaveChanges(const std::string& outputFileName, const std::map<std::string, std::string>& vocabulary, size_t startSize);
+void TryToSaveNewTranslation(const std::string& word, std::map<std::string, std::string>& vocabulary, std::istream& input, std::ostream& output);
+int TryToSaveChanges(const std::string& outputFileName, const std::map<std::string, std::string>& vocabulary, size_t startSize, 
+	std::istream& input, std::ostream& output);
