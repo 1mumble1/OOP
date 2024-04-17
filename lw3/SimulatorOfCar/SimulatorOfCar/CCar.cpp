@@ -1,26 +1,10 @@
-#include "Car.h"
-#include <cmath>
-#include <map>
+#include "CCar.h"
 
 const int GEAR_R = -1;
 const int GEAR_N = 0;
 const int MIN_SPEED = 0;
 const int MAX_SPEED = 150;
 const int MAX_R_SPEED = 20;
-
-struct SpeedLimits
-{
-	int lowerBound;
-	int upperBound;
-};
-
-const map<int8_t, SpeedLimits> GEARS_AND_SPEEDS = {
-	{1, {0, 30}},
-	{2, {20, 50}},
-	{3, {30, 60}},
-	{4, {40, 90}},
-	{5, {50, 150}}
-};
 
 bool Car::IsTurnedOn() const
 {
@@ -29,25 +13,15 @@ bool Car::IsTurnedOn() const
 
 Direction Car::GetDirection() const
 {
-	if (m_speed == 0)
-	{
-		return Direction::STANDING_STILL;
-	}
-
-	if (m_speed < 0)
-	{
-		return Direction::BACKWARD;
-	}
-
-	return Direction::FORWARD;
+	return m_direction;
 }
 
 int Car::GetSpeed() const
 {
-	return abs(m_speed);
+	return m_speed;
 }
 
-int8_t Car::GetGear() const
+int Car::GetGear() const
 {
 	return m_gear;
 }
@@ -76,14 +50,19 @@ bool Car::SetGear(int gear)
 		return false;
 	}
 
-	if ((gear == GEAR_R && m_speed != MIN_SPEED) ||
-		(gear == GEAR_N && m_speed < MIN_SPEED && m_speed > MAX_SPEED))
+	auto it = GEARS_AND_SPEEDS.find(gear);
+	if (it == GEARS_AND_SPEEDS.end())
 	{
 		return false;
 	}
 
-	auto it = GEARS_AND_SPEEDS.find(gear);
-	if (it == GEARS_AND_SPEEDS.end())
+	if (it->first == GEAR_R && m_speed != 0)
+	{
+		return false;
+	}
+
+	if ((m_direction == Direction::BACKWARD && gear > 0) ||
+		(m_direction == Direction::FORWARD && gear < 0))
 	{
 		return false;
 	}
@@ -109,30 +88,34 @@ bool Car::SetSpeed(int speed)
 		return false;
 	}
 
-	if (m_gear == GEAR_R && speed < MIN_SPEED && speed > MAX_R_SPEED)
-	{
-		return false;
-	}
-
-	if (m_gear == GEAR_N && m_speed < speed)
-	{
-		return false;
-	}
-
 	auto it = GEARS_AND_SPEEDS.find(m_gear);
-	if (speed < it->second.lowerBound && speed > it->second.upperBound)
+	if (it == GEARS_AND_SPEEDS.end())
 	{
 		return false;
 	}
 
-	if (m_gear == GEAR_R)
+	if (it->first == GEAR_N && m_speed < speed)
 	{
-		m_speed = -speed;
+		return false;
+	}
+
+	if (speed < it->second.lowerBound || speed > it->second.upperBound)
+	{
+		return false;
+	}
+
+	m_speed = speed;
+	if (speed == 0)
+	{
+		m_direction = Direction::STANDING_STILL;
+	}
+	else if (m_gear == GEAR_R)
+	{
+		m_direction = Direction::BACKWARD;
 	}
 	else
 	{
-		m_speed = speed;
+		m_direction = Direction::FORWARD;
 	}
-
 	return true;
 }
