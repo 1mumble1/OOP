@@ -9,9 +9,9 @@ public:
 
 	CRectangle(CPoint leftTop, double width, double height, uint32_t outlineColor, uint32_t fillColor)
 		:ISolidShape(outlineColor, fillColor)
-		,m_leftTop(leftTop)
-		,m_width(width)
-		,m_height(height)
+		, m_leftTop(leftTop)
+		, m_width(width)
+		, m_height(height)
 	{
 		if (width <= 0 || height <= 0)
 		{

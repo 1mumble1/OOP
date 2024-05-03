@@ -6,7 +6,6 @@
 
 int main()
 {
-
 	ShapeService shapeService;
 	std::string line;
 	while (std::getline(std::cin, line))
@@ -17,6 +16,7 @@ int main()
 		}
 
 		shapeService.ConstructShape(line);
+
 	}
 
 	if (shapeService.GetMaxAreaShape() == nullptr)

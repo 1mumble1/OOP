@@ -10,7 +10,7 @@ double CTriangle::GetSide(const CPoint& vertex1, const CPoint& vertex2) const
 
 double CTriangle::GetArea() const
 {
-    return 0,5 * abs(
+    return 0, 5 * abs(
         (m_vertex1.m_x - m_vertex3.m_x) *
         (m_vertex2.m_y - m_vertex3.m_y) -
         (m_vertex2.m_x - m_vertex3.m_x) *
@@ -65,12 +65,9 @@ CPoint CTriangle::GetVertex3() const
 
 void CTriangle::Draw(std::shared_ptr<ICanvas> canvas)
 {
-    canvas->FillPolygon({ m_vertex1,
-                          m_vertex2,
-                          m_vertex3 },
-        m_outlineColor,
-        m_fillColor);
+    std::vector<CPoint> points = { m_vertex1, m_vertex2, m_vertex3 };
 
+    canvas->FillPolygon(points, m_fillColor);
     canvas->DrawLine(m_vertex1, m_vertex2, m_outlineColor);
     canvas->DrawLine(m_vertex2, m_vertex3, m_outlineColor);
     canvas->DrawLine(m_vertex3, m_vertex1, m_outlineColor);

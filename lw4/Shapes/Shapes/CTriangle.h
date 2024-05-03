@@ -9,9 +9,9 @@ public:
 
 	CTriangle(CPoint vertex1, CPoint vertex2, CPoint vertex3, uint32_t outlineColor, uint32_t fillColor)
 		:ISolidShape(outlineColor, fillColor)
-		,m_vertex1(vertex1)
-		,m_vertex2(vertex2)
-		,m_vertex3(vertex3)
+		, m_vertex1(vertex1)
+		, m_vertex2(vertex2)
+		, m_vertex3(vertex3)
 	{
 		double side12 = GetSide(vertex1, vertex2);
 		double side23 = GetSide(vertex2, vertex3);

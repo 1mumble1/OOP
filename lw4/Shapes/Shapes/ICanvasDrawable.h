@@ -4,5 +4,5 @@
 class ICanvasDrawable
 {
 public:
-	virtual void Draw(std::shared_ptr<ICanvas> canvas);
+	virtual void Draw(std::shared_ptr<ICanvas> canvas) = 0;
 };

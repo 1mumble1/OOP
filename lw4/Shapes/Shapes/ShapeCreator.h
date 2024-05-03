@@ -9,7 +9,7 @@
 class ShapeCreator
 {
 public:
-	static std::shared_ptr<IShape> CreateShape(const std::string& line);
+    static std::shared_ptr<IShape> CreateShape(const std::string& line);
 
 private:
     static std::shared_ptr<CLineSegment> CreateLineSegment(std::istringstream& iss);

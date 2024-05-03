@@ -63,7 +63,7 @@ void ShapeService::DrawShapes()
             }
         }
 
-        window->clear(sf::Color::Black);
+        window->clear(sf::Color::White);
 
         for (auto const& shape : m_shapes)
         {

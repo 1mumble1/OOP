@@ -59,7 +59,7 @@ void CRectangle::Draw(std::shared_ptr<ICanvas> canvas)
     CPoint leftBottom(m_leftTop.m_x, GetRightBottom().m_y);
     std::vector<CPoint> points = { m_leftTop, rightTop, GetRightBottom(), leftBottom };
 
-    canvas->FillPolygon(points, m_outlineColor, m_fillColor);
+    canvas->FillPolygon(points, m_fillColor);
 
     canvas->DrawLine(m_leftTop, rightTop, m_outlineColor);
     canvas->DrawLine(rightTop, GetRightBottom(), m_outlineColor);

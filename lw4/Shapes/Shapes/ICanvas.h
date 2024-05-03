@@ -6,11 +6,11 @@
 class ICanvas
 {
 public:
-	virtual void DrawLine(CPoint startPoint, CPoint endPoint, uint32_t lineColor);
+	virtual void DrawLine(CPoint startPoint, CPoint endPoint, uint32_t lineColor) = 0;
 
-	virtual void FillPolygon(std::vector<CPoint> points, uint32_t lineColor, uint32_t fillColor);
+	virtual void FillPolygon(std::vector<CPoint> points, uint32_t fillColor) = 0;
 
-	virtual void DrawCircle(CPoint center, double radius, uint32_t lineColor);
+	virtual void DrawCircle(CPoint center, double radius, uint32_t lineColor) = 0;
 
-	virtual void FillCircle(CPoint center, double radius, uint32_t fillColor);
+	virtual void FillCircle(CPoint center, double radius, uint32_t fillColor) = 0;
 };

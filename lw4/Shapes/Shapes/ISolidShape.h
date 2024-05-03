@@ -6,7 +6,7 @@ class ISolidShape : public IShape
 public:
 	ISolidShape(uint32_t outlineColor, uint32_t fillColor)
 		:IShape(outlineColor)
-		,m_fillColor(fillColor)
+		, m_fillColor(fillColor)
 	{}
 
 	virtual uint32_t GetFillColor() const = 0;

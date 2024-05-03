@@ -9,8 +9,8 @@ public:
 
 	CCircle(CPoint center, double radius, uint32_t outlineColor, uint32_t fillColor)
 		:ISolidShape(outlineColor, fillColor)
-		,m_center(center)
-		,m_radius(radius)
+		, m_center(center)
+		, m_radius(radius)
 	{
 		if (radius <= 0)
 		{
