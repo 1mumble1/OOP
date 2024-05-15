@@ -5,6 +5,7 @@ const std::string CLineSegment::NAME = "line_segment";
 
 double CLineSegment::GetArea() const
 {
+    
     return 0;
 }
 
