@@ -141,6 +141,17 @@ TEST_CASE("Get substr")
 			REQUIRE(strcmp(substr.GetStringData(), "world") == 0);
 		}
 	}
+
+	WHEN("length of substr < 0")
+	{
+		const char* chs = "hello world";
+		CMyString str = CMyString(chs);
+		CMyString substr = str.SubString(6, -10);
+		THEN("substr contains symbols to the end of str")
+		{
+			REQUIRE(strcmp(substr.GetStringData(), "world") == 0);
+		}
+	}
 }
 
 TEST_CASE("Clear string")
