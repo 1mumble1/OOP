@@ -6,7 +6,7 @@
 #include "../StringList/CStringList.h"
 #include "../../../catch.hpp"
 
-TEST_CASE("Create by default constructor")
+TEST_CASE("Constructors")
 {
 	WHEN("default constructor")
 	{
@@ -15,6 +15,71 @@ TEST_CASE("Create by default constructor")
 		{
 			REQUIRE(list.Empty());
 			REQUIRE(list.GetSize() == 0);
+		}
+	}
+
+	WHEN("copy constructor")
+	{
+		CStringList list;
+		list.PushBack("1");
+		CStringList newList(list);
+
+		THEN("list = newList, list not empty")
+		{
+			REQUIRE(!list.Empty());
+			REQUIRE(!newList.Empty());
+			auto iter1 = list.begin();
+			auto iter2 = newList.begin();
+			REQUIRE(*iter1 == *iter2);
+		}
+	}
+
+	WHEN("move constructor")
+	{
+		CStringList list;
+		list.PushBack("1");
+		CStringList newList(std::move(list));
+
+		THEN("list = newList, list not empty")
+		{
+			REQUIRE(list.Empty());
+			REQUIRE(!newList.Empty());
+			auto iter2 = newList.begin();
+			REQUIRE(*iter2 == "1");
+		}
+	}
+}
+
+TEST_CASE("=")
+{
+	WHEN("copy =")
+	{
+		CStringList list;
+		list.PushBack("1");
+		CStringList newList = list;
+
+		THEN("list = newList, list not empty")
+		{
+			REQUIRE(!list.Empty());
+			REQUIRE(!newList.Empty());
+			auto iter1 = list.begin();
+			auto iter2 = newList.begin();
+			REQUIRE(*iter1 == *iter2);
+		}
+	}
+
+	WHEN("move =")
+	{
+		CStringList list;
+		list.PushBack("1");
+		CStringList newList = std::move(list);
+
+		THEN("list = newList, list not empty")
+		{
+			REQUIRE(list.Empty());
+			REQUIRE(!newList.Empty());
+			auto iter2 = newList.begin();
+			REQUIRE(*iter2 == "1");
 		}
 	}
 }
